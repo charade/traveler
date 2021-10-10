@@ -1,0 +1,24 @@
+import { Dispatch } from "react";
+import { Actions } from '../actions/index';
+import { ActionResponseType } from "../reducers";
+import { getPlace } from "../../services";
+import { AxiosError, AxiosResponse } from "axios";
+
+export const request = (entry: string) =>{
+    return(dispatch : Dispatch<ActionResponseType>) => {
+        getPlace(entry)
+        .then((res: AxiosResponse<any>) => {
+            console.log(res)
+            dispatch({
+                type : Actions.COMPUTE_REQUEST,
+                payload : res.data
+            })
+        })
+        .catch((error: AxiosError<any>) => {
+            dispatch({
+                type : Actions.REQUEST_ERROR,
+                payload : error.response?.data
+            })
+        })
+    }
+}
