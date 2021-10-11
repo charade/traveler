@@ -1,6 +1,6 @@
 import { Dispatch } from "react";
 import { Actions } from '../actions/index';
-import { ActionResponseType } from "../reducers";
+import { ActionResponseType } from "../reducers/requestReducer";
 import { getPlace } from "../../services";
 import { AxiosError, AxiosResponse } from "axios";
 

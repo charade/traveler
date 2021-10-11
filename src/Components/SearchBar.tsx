@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useSearchBarStyle } from '../assets/styles/index.styles';
-import { IconButton, Popper, TextField } from '@material-ui/core';
+import { IconButton, TextField } from '@material-ui/core';
 import ExploreIcon from '@mui/icons-material/Explore';
 import InputAdornment from '@mui/material/InputAdornment';
-import * as actionCreators from '../state/actions-creators';
+import * as actionCreators from '../state/actions-creators/requestAction';
 import { bindActionCreators } from 'redux';
 import { useDispatch, useSelector } from 'react-redux';
 import { ReducerRootStateType } from '../state/store';
@@ -15,7 +15,7 @@ const SearchBar = ()=>{
     //field entry
     const [entry, setEntry] = useState<string>('');
     //positionning popper
-    const [popperAnchorEl, setPopperAnchorEl] = useState<HTMLInputElement | null>();
+    const [popperAnchorEl, setPopperAnchorEl] = useState<HTMLInputElement | null>(null);
     const classes = useSearchBarStyle();
     const dispatch = useDispatch();
     const { request } = bindActionCreators(actionCreators, dispatch);
@@ -34,7 +34,7 @@ const SearchBar = ()=>{
         setPopperAnchorEl(e.target)
     }
     //onBlur inputEl
-    const handleBlurInputField = () => setPopperAnchorEl(null);
+    const handleBlurInputField = () => setTimeout(() => setPopperAnchorEl(null), 50);
     
     return(
         <div className = {classes.root}>
@@ -57,14 +57,7 @@ const SearchBar = ()=>{
             <IconButton className = {classes.btn}>
                 <AppsIcon />
             </IconButton>
-            <Popper 
-                open = { (popperAnchorEl && true ) ?? false}
-                anchorEl = {popperAnchorEl}
-                placement = 'bottom'
-                disablePortal
-            >
-               <AutoCompletePane />
-            </Popper>
+            <AutoCompletePane anchor = {popperAnchorEl}/>
         </div>
     )
 }

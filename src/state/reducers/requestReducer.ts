@@ -11,7 +11,7 @@ export type ActionResponseType = {
 };
 const INITIAL_STATE = {error : null, datas : []};
 
-export const requestReducer = (state: StateT = INITIAL_STATE, action: ActionResponseType ) =>{
+const requestReducer = (state: StateT = INITIAL_STATE, action: ActionResponseType ) =>{
     switch(action.type){
         case Actions.COMPUTE_REQUEST : 
             return {error : null, datas: action.payload};
@@ -20,3 +20,5 @@ export const requestReducer = (state: StateT = INITIAL_STATE, action: ActionResp
         default : return state;
     }
 }
+
+export default requestReducer;

@@ -1,4 +1,4 @@
-import Map from './Map';
+import Map from './map/Map';
 import SearchBar from './SearchBar';
 
 export { 
