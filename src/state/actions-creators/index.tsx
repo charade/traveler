@@ -8,10 +8,9 @@ export const request = (entry: string) =>{
     return(dispatch : Dispatch<ActionResponseType>) => {
         getPlace(entry)
         .then((res: AxiosResponse<any>) => {
-            console.log(res)
             dispatch({
                 type : Actions.COMPUTE_REQUEST,
-                payload : res.data
+                payload : res.data.features
             })
         })
         .catch((error: AxiosError<any>) => {
