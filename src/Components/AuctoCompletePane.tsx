@@ -2,7 +2,6 @@ import { useSelector } from "react-redux";
 import { ReducerRootStateType } from "../state/store";
 import { useAutoCompletePaneStyle } from '../assets/styles/index.styles';
 import { Popper } from "@material-ui/core";
-import { NoMatchFound } from './NoMatchFound';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -10,7 +9,8 @@ import * as mapActionCreators from "../state/actions-creators/mapAction";
 import React from "react";
 
 type AutoCompletePropsT = {
-    anchor : HTMLInputElement | null
+    anchor : HTMLInputElement | null;
+    setSelectedArea : (area : string) => void
 }
 
 export const AutoCompletePane = (props : AutoCompletePropsT) =>{
@@ -19,8 +19,7 @@ export const AutoCompletePane = (props : AutoCompletePropsT) =>{
     const { mapFlyTo } = bindActionCreators(mapActionCreators, dispatch);
     const classes = useAutoCompletePaneStyle();
     
-    const handleChangeMapPosition = (e : React.MouseEvent<HTMLLIElement>) =>{
-        console.log(requestStore.datas);
+    const handleChangeMapPosition = (e : React.PointerEvent<HTMLLIElement>) =>{
         const target = e.target as HTMLLIElement;
         //assert target.getAttribute not null
         const index = parseInt(target.getAttribute('data-index')!);
@@ -29,7 +28,9 @@ export const AutoCompletePane = (props : AutoCompletePropsT) =>{
         */
        if(requestStore.datas){
            const coords = requestStore.datas[index].geometry.coordinates;
-           console.log(coords)
+           console.log(requestStore.datas[index].properties.label);
+           //update input field with selected area label
+           props.setSelectedArea(requestStore.datas[index].properties.label);
            //coords from api.gouv are inverted
            //send coord to the store
            mapFlyTo([coords[1], coords[0]]);
@@ -37,6 +38,7 @@ export const AutoCompletePane = (props : AutoCompletePropsT) =>{
     };
 
     return(
+        requestStore.datas && requestStore.datas.length ?
         <Popper 
             open = { (props.anchor && true ) ?? false}
             anchorEl = {props.anchor}
@@ -70,8 +72,9 @@ export const AutoCompletePane = (props : AutoCompletePropsT) =>{
                     )
                 })}
             </ul>
-            <NoMatchFound condition = {!requestStore.datas?.length}/>
-        </Popper>
+            {/* <NoMatchFound condition = {!requestStore.datas?.length}/> */}
+        </Popper> :
+        null
     )
 }
 

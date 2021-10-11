@@ -24,9 +24,9 @@ const useSearchBarStyle = makeStyles( theme =>({
     },
     btn : {
         border: '1px solid rgba(0, 0, 0, .3)',
-        '&:hover' : {
-            background : 'rgba(80, 70, 100, .4)'
-        }
+        // '&:hover' : {
+        //     background : 'rgba(80, 70, 100, .4)'
+        // }
     }
 }))
 

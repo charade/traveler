@@ -25,9 +25,15 @@ export const AnimateMap = () => {
         }
     },[]);
 
+    useEffect(() => {
+        const handleClick = () => map.setZoom(map.getZoom() + 2, {easeLinearity : 1})
+        map.on('click',handleClick)
+    },[]);
+
     useLayoutEffect(() => {
-        map.flyTo([position.latitude, position.longitude],14, {
-            duration : 2
+        map.flyTo([position.latitude, position.longitude],18, {
+            duration : 3,
+            // easeLinearity : .5
         })
         // map.setView([position.latitude, position.longitude], 14);
         // console.log(position)

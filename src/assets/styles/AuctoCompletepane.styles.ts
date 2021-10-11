@@ -13,9 +13,8 @@ const useAutoCompletePaneStyle = makeStyles(theme => ({
     },
     list :{
         listStyle : 'none',
-        maxHeight : '500px',
+        // maxHeight : '500px',
         overflow :'scroll',
-        border : '1px solid red',
         padding :0
     },
     item : {
@@ -25,8 +24,11 @@ const useAutoCompletePaneStyle = makeStyles(theme => ({
         display : 'flex',
         margin : '10px 0',
         alignItems : 'flex-start',
+        padding : '10px 0',
         justifyContent  :'flex-start',
-        border: '1px solid blue'
+        '&:not(*:last-child)' : {
+            borderBottom : '1px solid rgba(0, 0, 0, .4)'
+        }
     },
     icon : {
         margin: '5px'
