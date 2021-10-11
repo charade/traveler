@@ -1,4 +1,4 @@
-import { MapContainer, TileLayer} from 'react-leaflet';
+import { MapContainer, TileLayer, Marker} from 'react-leaflet';
 import { useMapStyle } from '../../assets/styles/index.styles';
 import { AnimateMap } from './AnimateMap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -23,6 +23,7 @@ const Map = () => {
                     url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                 />
                <AnimateMap />
+           
             </MapContainer>
         </div>
     )
