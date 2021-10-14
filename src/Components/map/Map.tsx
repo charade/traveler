@@ -16,7 +16,7 @@ export const Map = () => {
         <div className = {classes.root}>
             <MapContainer 
                 center={[DEFAULT_POSITION_ON_PARIS.lat, DEFAULT_POSITION_ON_PARIS.long]} 
-                zoom={4}
+                zoom={8}
             >
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'

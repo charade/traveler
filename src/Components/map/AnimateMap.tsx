@@ -48,8 +48,8 @@ export const AnimateMap = () => {
     useLayoutEffect(() => {
         //position contains coords and label properties
         //coords are type LatLng oject with lat(latitude key) & lng(lngitude key)
-        map.flyTo([position.coords.lat, position.coords.lng],17, {
-            duration : 4,
+        map.flyTo([position.coords.lat, position.coords.lng],14, {
+            duration : 2,
         })
     },[position, map]);
    

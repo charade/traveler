@@ -46,6 +46,7 @@ export const SearchBar = ()=>{
             <TextField
                 type = 'text'
                 inputRef = { inputRef }
+                InputLabelProps = {{style : {fontSize : '1.5rem', width : "160px", background :'white'}}}
                 variant = 'outlined'
                 // margin = 'normal'
                 size = 'small'
