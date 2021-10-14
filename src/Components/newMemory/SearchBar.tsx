@@ -28,10 +28,9 @@ export const SearchBar = ()=>{
     },[selectedArea]);
     //make sure search field state not empty before requesting
     useLayoutEffect(() => {
+        //reload request on field change every 400ms
         setTimeout(() => request(entry), 400);
-        //once requesting input user empty text field
-        //no match messag not showing
-        // !entry && setTimeout(() => setPopperAnchorEl(null), 300);
+
     },[entry, request]);
 
     //onChange inputEl value

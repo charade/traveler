@@ -1,24 +1,27 @@
 import { Actions } from "../actions"
+import { LatLng } from 'leaflet';
 
-type StateType = {
-    latitude : number,
-    longitude : number
+//defining poition by coordinates and place label
+export type StateType = {
+    coords : LatLng,
+    label : string
 }
 
 //action.payload is of type [latitude, longitude]
 export type ActionType = {
     type : string,
-    payload : [number, number]
+    payload : StateType
 };
+
 const DEFAULT_POSITION_ON_PARIS = {
-    latitude : 48.8534,
-    longitude : 2.3488
+    coords : new LatLng(48.8534, 2.3488),
+    label : ''
 }
 
 const updateMapReducer = (state : StateType = DEFAULT_POSITION_ON_PARIS, action: ActionType) => {
     switch(action.type){
         case Actions.FLY_TO_COORD : 
-            return {latitude : action.payload[0], longitude : action.payload[1]};
+            return {coords : action.payload.coords, label : action.payload.label};
         default : return state;
     }
 }

@@ -6,7 +6,7 @@ import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import * as mapActionCreators from "../../state/actions-creators/map-actions-creators";
-import { RequestedStateType } from '../../state/reducers/requestReducer';
+import { LatLng } from 'leaflet';
 
 type AutoCompletePropsT = {
     anchor : HTMLInputElement | null;
@@ -25,17 +25,18 @@ export const AutoCompletePane = (props : AutoCompletePropsT) =>{
         const index = parseInt(target.getAttribute('data-index')!);
        /** datas can be null in case of AxiosError or
         * at initialization before request
-        * then we need to check if these are the right datas from search bar
-        * not reverted ones from from coords to label request onClick marker
         */
-       if(requestStore.datas && requestStore.type === RequestedStateType.COMPUTE){
+       if(requestStore.datas){
            const coords = requestStore.datas[index].geometry.coordinates;
-           console.log(requestStore.datas[index].properties.label);
+           const label=  requestStore.datas[index].properties.label;
            //update input field with selected area label
            props.setSelectedArea(requestStore.datas[index].properties.label);
            //coords from api.gouv are inverted
            //send coord to the store
-           mapFlyTo([coords[1], coords[0]]);
+           mapFlyTo({
+               coords : new LatLng(coords[1], coords[0]),
+               label  
+            });
        }
     };
 

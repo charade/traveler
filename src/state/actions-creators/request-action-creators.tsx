@@ -22,22 +22,3 @@ export const request = (entry: string) =>{
         })
     }
 };
-
-export const requestByCoords = (coords : LatLng) => {
-    return(dispatch : Dispatch<ActionResponseType>) =>{
-        reverseCoordToPlace(coords)
-        .then((res: AxiosResponse<any>) => {
-            console.log(res.data)
-            dispatch({
-                type : Actions.COORDS_TO_LABEL,
-                payload : res.data.features
-            })
-        })
-        .catch((error : AxiosError<any>) => {
-            dispatch({
-                type : Actions.REQUEST_ERROR,
-                payload : error.response?.data
-            })
-        })
-    }
-}

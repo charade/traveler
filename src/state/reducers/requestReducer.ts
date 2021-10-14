@@ -1,9 +1,9 @@
 import { Actions } from "../actions";
 import { ResponseType } from '../../services/ResponseTypes';
+
 export type StateT = {
     datas : ResponseType | null;
     error : ResponseType | null;
-    type : string
 };
 export type ActionResponseType = {
     type: string,
@@ -15,21 +15,16 @@ export type ActionResponseType = {
  * and from reverse coords request
  * so we add a type key
  */
-export enum RequestedStateType{
-    COMPUTE = "compute",
-    REVERSE = "reverse",
-    NULL = ''
-}
-const INITIAL_STATE = {error : null, datas : [], type : RequestedStateType.NULL};
+const INITIAL_STATE = {error : null, datas : []};
 
 export const requestReducer = (state: StateT = INITIAL_STATE, action: ActionResponseType ) =>{
     switch(action.type){
         case Actions.COMPUTE_REQUEST :
-            return {error : null, datas: action.payload, type : RequestedStateType.COMPUTE};
+            return {error : null, datas: action.payload};
             case Actions.COORDS_TO_LABEL: 
-            return {error : null, datas: action.payload, type : RequestedStateType.REVERSE};
+            return {error : null, datas: action.payload};
         case Actions.REQUEST_ERROR : 
-            return {datas : null, error: action.payload, type : RequestedStateType.NULL};
+            return {datas : null, error: action.payload};
         default : return state;
     }
 }

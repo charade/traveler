@@ -10,12 +10,9 @@ import { ReducerRootStateType } from '../../state/store';
 
 export const AnimateMap = () => {
     //toogle dialog
-    //save coords when click on a place
-    const [coords, setCoords] = useState<LatLng | null>(null);
     //get selected place on search result
     const dispatch = useDispatch();
     const { mapFlyTo } = bindActionCreators(mapActionCreators, dispatch);
-    const { requestByCoords } = bindActionCreators(requestActionCreator, dispatch);
     const position = useSelector((store : ReducerRootStateType) => store.mapStore);
     const map = useMap();
     
@@ -23,34 +20,43 @@ export const AnimateMap = () => {
     useEffect(() => {
         if('geolocation' in navigator){
             navigator.geolocation.getCurrentPosition((position) => {
-                mapFlyTo([position.coords.latitude, position.coords.longitude]);
+
+                mapFlyTo({
+                    coords : new LatLng(position.coords.latitude, position.coords.longitude),
+                    label :  ''
+                });
             },async() => {
                 /**if user denied position acces we get it's IP position */
                 const position = await fetch('https://ipapi.co/json')
                 .then(res => res.json())
                 .then(location => location);
-                mapFlyTo([position.latitude, position.longitude]);
+                mapFlyTo({
+                    coords : new LatLng(position.latitude, position.longitude),
+                    label : ''}
+                    );
             })
         }
     },[]);
 
     //animate zoom when clicking on a place
     useEffect(() => {
-        const handleClick = () => map.setZoom(map.getZoom() + 2, {easeLinearity : 1})
-        map.on('click',handleClick)
+        const handleClick = () => map.setZoom(map.getZoom() + 1, {easeLinearity : 1})
+        map.on('click',handleClick);
     },[]);
     
     //update map with a fly effect when new location selected
     useLayoutEffect(() => {
-        map.flyTo([position.latitude, position.longitude],17, {
+        //position contains coords and label properties
+        //coords are type LatLng oject with lat(latitude key) & lng(lngitude key)
+        map.flyTo([position.coords.lat, position.coords.lng],17, {
             duration : 4,
         })
     },[position, map]);
    
 
     return(
-        <Marker position={[position.latitude, position.longitude]}
-            
+        <Marker 
+            position={[position.coords.lat, position.coords.lng]}
         >
            
         </Marker>
