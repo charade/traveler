@@ -4,5 +4,9 @@ export enum Actions{
     //handle autocomplete request
     COMPUTE_REQUEST = 'computeRequest',
     //handle update map position
-    FLY_TO_COORD = 'flyToNewCoord'
+    FLY_TO_COORD = 'flyToNewCoord',
+    //get location label from coords
+    COORDS_TO_LABEL = 'coordsToLabel',
+    //bind a memory to a place
+    CREATE_MEMORIES = 'createMemories'
 }

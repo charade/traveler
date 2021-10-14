@@ -1,22 +1,20 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
-import { useSearchBarStyle } from '../assets/styles/index.styles';
 import { IconButton, TextField } from '@material-ui/core';
 import ExploreIcon from '@mui/icons-material/Explore';
 import InputAdornment from '@mui/material/InputAdornment';
-import * as actionCreators from '../state/actions-creators/requestAction';
+import * as actionCreators from '../../state/actions-creators/request-action-creators';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
 import AppsIcon from '@mui/icons-material/Apps';
 import { AutoCompletePane } from './AuctoCompletePane';
 
-const SearchBar = ()=>{
+export const SearchBar = ()=>{
     //field entry
     const [entry, setEntry] = useState<string>('');
     const [selectedArea, setSelectedArea] = useState<string>('');
     //positionning popper
     const [popperAnchorEl, setPopperAnchorEl] = useState<HTMLInputElement | null>(null);
     const inputRef = useRef<HTMLInputElement>(null);
-    const classes = useSearchBarStyle();
     const dispatch = useDispatch();
     const { request } = bindActionCreators(actionCreators, dispatch);
     
@@ -45,16 +43,17 @@ const SearchBar = ()=>{
     const handleBlurInputField = () => setTimeout(() => setPopperAnchorEl(null), 300);
     
     return(
-        <div className = {classes.root}>
+        <>
             <TextField
                 type = 'text'
                 inputRef = { inputRef }
                 variant = 'outlined'
+                // margin = 'normal'
+                size = 'small'
                 label = 'type your location here' 
                 onChange = {handleChange}
                 onBlur = { handleBlurInputField }
-                classes = {{root : classes.inputEl}}
-                inputProps = {{style : {fontSize : '1.7rem'}}}
+                inputProps = {{style : {fontSize : '1.7rem', height :'100%'}}}
                 InputProps = {{
                     startAdornment: (
                         <InputAdornment position = 'start'>
@@ -63,12 +62,10 @@ const SearchBar = ()=>{
                     )
                 }}
             />
-            <IconButton className = {classes.btn}>
-                <AppsIcon />
-            </IconButton>
-            <AutoCompletePane anchor = {popperAnchorEl} setSelectedArea = {setSelectedArea}/>
-        </div>
+            <AutoCompletePane 
+                anchor = {popperAnchorEl} 
+                setSelectedArea = {setSelectedArea}
+            />
+        </>
     )
 }
-
-export default SearchBar;

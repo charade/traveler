@@ -9,14 +9,14 @@ const DEFAULT_POSITION_ON_PARIS = {
     long : 2.3488
 }
 
-const Map = () => {
+export const Map = () => {
     const classes = useMapStyle();
 
     return(
         <div className = {classes.root}>
             <MapContainer 
                 center={[DEFAULT_POSITION_ON_PARIS.lat, DEFAULT_POSITION_ON_PARIS.long]} 
-                zoom={8}
+                zoom={4}
             >
                 <TileLayer
                     attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
@@ -28,5 +28,3 @@ const Map = () => {
         </div>
     )
 }
-
-export default Map;

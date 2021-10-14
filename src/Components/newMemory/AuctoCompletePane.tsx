@@ -1,12 +1,12 @@
 import { useSelector } from "react-redux";
-import { ReducerRootStateType } from "../state/store";
-import { useAutoCompletePaneStyle } from '../assets/styles/index.styles';
+import { ReducerRootStateType } from "../../state/store";
+import { useAutoCompletePaneStyle } from '../../assets/styles/index.styles';
 import { Popper } from "@material-ui/core";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import { useDispatch } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as mapActionCreators from "../state/actions-creators/mapAction";
-import React from "react";
+import * as mapActionCreators from "../../state/actions-creators/map-actions-creators";
+import { RequestedStateType } from '../../state/reducers/requestReducer';
 
 type AutoCompletePropsT = {
     anchor : HTMLInputElement | null;
@@ -23,10 +23,12 @@ export const AutoCompletePane = (props : AutoCompletePropsT) =>{
         const target = e.target as HTMLLIElement;
         //assert target.getAttribute not null
         const index = parseInt(target.getAttribute('data-index')!);
-        /*datas can be null in case of AxiosError or 
-        at initialization before request 
+       /** datas can be null in case of AxiosError or
+        * at initialization before request
+        * then we need to check if these are the right datas from search bar
+        * not reverted ones from from coords to label request onClick marker
         */
-       if(requestStore.datas){
+       if(requestStore.datas && requestStore.type === RequestedStateType.COMPUTE){
            const coords = requestStore.datas[index].geometry.coordinates;
            console.log(requestStore.datas[index].properties.label);
            //update input field with selected area label

@@ -1,3 +1,5 @@
-import requestReducer from "./requestReducer";
+import {requestReducer} from "./requestReducer";
 import mapReducer from "./mapReducer";
-export {requestReducer, mapReducer}
+import memoriesReducer from './memoriesReducer';
+
+export {requestReducer, mapReducer, memoriesReducer }
