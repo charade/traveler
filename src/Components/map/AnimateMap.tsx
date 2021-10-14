@@ -55,17 +55,6 @@ export const AnimateMap = () => {
             })
         }
     },[position, map]);
-   
 
-    return(
-        //on DomLoaded post a maker only if user allow to share its position
-        //or when searched for a place
-        position.coords && Object.values(position.coords).length ?
-        <Marker 
-            position={[position.coords.lat, position.coords.lng]}
-        >
-           
-        </Marker> : null
-    )
-    
+    return null
 }

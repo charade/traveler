@@ -7,7 +7,13 @@ const useMapStyle = makeStyles(theme => ({
         [theme.breakpoints.up('md')] : {
             // width : '900px',
         },
+    },
+    markerContainer : {
+        border : 'none',
+        background :'transparent',
+        fontSize : '2.5rem'
     }
+
 }))
 
 export default useMapStyle;

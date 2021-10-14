@@ -32,17 +32,23 @@ export const Map = () => {
                             <Marker
                                 position = {[memory.coords!.lat, memory.coords!.lng]}
                                 icon = {new L.DivIcon({
-                                    iconAnchor: [0, 30],
-                                    html :  `<span style = "border : none;background : transparent;font-size : 4rem">${memory.marker}</span>`
-
+                                    className : classes.markerContainer, 
+                                    iconAnchor: [10, 20],
+                                    html : memory.marker,
+                                    popupAnchor : [0, -20]
                                 })}
                             >
-                                {memory.comment && 
+                                
                                     <Popup>
-                                        adress : {memory.label}<br/>
-                                        note : { memory.comment }
+                                        {memory.comment ?
+                                            <>
+                                                adress : {memory.label}
+                                                <br/>
+                                                note : { memory.comment }
+                                            </> :
+                                            'no comments'
+                                        }
                                     </Popup>
-                               }
                            </Marker>
                        )
                    })
