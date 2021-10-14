@@ -46,9 +46,16 @@ export const SearchBar = ()=>{
             <TextField
                 type = 'text'
                 inputRef = { inputRef }
-                InputLabelProps = {{style : {fontSize : '1.5rem', width : "160px", background :'white'}}}
+                InputLabelProps = {{
+                    style : {
+                        fontSize : '1.5rem', 
+                        width : "170px", 
+                        background :'white',
+                        color : 'red'
+                    }
+                }}
                 variant = 'outlined'
-                // margin = 'normal'
+                required
                 size = 'small'
                 label = 'type your location here' 
                 onChange = {handleChange}

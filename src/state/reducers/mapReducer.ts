@@ -3,7 +3,7 @@ import { LatLng } from 'leaflet';
 
 //defining poition by coordinates and place label
 export type StateType = {
-    coords : LatLng,
+    coords : LatLng | null,
     label : string
 }
 
@@ -14,7 +14,7 @@ export type ActionType = {
 };
 
 const DEFAULT_POSITION_ON_PARIS = {
-    coords : new LatLng(48.8534, 2.3488),
+    coords : null,
     label : ''
 }
 

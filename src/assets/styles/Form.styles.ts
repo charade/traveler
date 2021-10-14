@@ -29,5 +29,13 @@ const useFormStyle = makeStyles(theme => ({
         color: 'rgb(61, 131, 246)',
         fontSize :'1.2rem',
     },
+    marker : {
+        fontSize : '1.7rem',
+        border :'1px solid red',
+        '& > *' :{
+            width :'100%',
+            height : '100%'
+        }
+    }
 }));
 export default useFormStyle;

@@ -8,5 +8,7 @@ export enum Actions{
     //get location label from coords
     COORDS_TO_LABEL = 'coordsToLabel',
     //bind a memory to a place
-    CREATE_MEMORIES = 'createMemories'
+    CREATE_MEMORIES = 'createMemories',
+    //add a momories to th map
+    ADD_MEMORY = 'addMemory'
 }
