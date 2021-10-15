@@ -1,9 +1,11 @@
 import { makeStyles } from "@material-ui/core";
 
-const useMapStyle = makeStyles(theme => ({
+const useMainStyle = makeStyles(theme => ({
     root : {
         width : '90%',
         height : '58%',
+        display :'flex',
+        flexDirection : 'column',
         [theme.breakpoints.up('md')] : {
             // width : '900px',
         },
@@ -16,4 +18,4 @@ const useMapStyle = makeStyles(theme => ({
 
 }))
 
-export default useMapStyle;
+export default useMainStyle;

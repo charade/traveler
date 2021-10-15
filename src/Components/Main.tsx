@@ -1,24 +1,27 @@
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import L from 'leaflet';
-import { useMapStyle } from '../../assets/styles/index.styles';
+import { useMediaQuery } from '@material-ui/core';
+import { useMainStyle } from '../assets/styles/index.styles';
 import { AnimateMap } from './AnimateMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from "redux";
-import * as memoriesActionCreators from '../../state/actions-creators/memories-actions-creators';
-import { ReducerRootStateType } from '../../state/store';
-import { Memory } from '../../state/reducers/memoriesReducer';
+import * as memoriesActionCreators from '../state/actions-creators/memories-actions-creators';
+import { ReducerRootStateType } from '../state/store';
+import { Memory } from '../state/reducers/memoriesReducer';
 import { useEffect } from 'react';
+import { CategoriesPanel } from "./CategoriesPanel";
 
 const DEFAULT_POSITION_ON_PARIS = {
     lat : 48.8534,
     long : 2.3488
 }
 
-export const Map = () => {
-    const classes = useMapStyle();
+export const Main = () => {
+    const classes = useMainStyle();
     const memories = useSelector((store : ReducerRootStateType) => store.memoriesStore)
     const dispatch = useDispatch();
-    const { loadMemories } = bindActionCreators(memoriesActionCreators, dispatch)
+    const { loadMemories } = bindActionCreators(memoriesActionCreators, dispatch);
+    const isScreenLarge = useMediaQuery('(min-width : 700px)');
     //loading local stored momeries at componentDidMount if there are some
     useEffect(() => {
         const memos = localStorage.getItem("memories");
@@ -34,6 +37,7 @@ export const Map = () => {
 
     return(
         <div className = {classes.root}>
+            {isScreenLarge && <CategoriesPanel />}
             <MapContainer 
                 center={[DEFAULT_POSITION_ON_PARIS.lat, DEFAULT_POSITION_ON_PARIS.long]} 
                 zoom={8}

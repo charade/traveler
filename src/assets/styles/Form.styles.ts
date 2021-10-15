@@ -20,6 +20,11 @@ const useFormStyle = makeStyles(theme => ({
             // alignSelf : 'flex-start'
         }
     },
+    textFieldLabel : {
+        fontSize : '1.3rem', 
+        width : "130px", 
+        background :'white',
+    },
     btnBox : {
        display :'flex',
        justifyContent: "space-between"

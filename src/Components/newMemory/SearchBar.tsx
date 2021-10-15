@@ -5,8 +5,9 @@ import InputAdornment from '@mui/material/InputAdornment';
 import * as actionCreators from '../../state/actions-creators/request-action-creators';
 import { bindActionCreators } from 'redux';
 import { useDispatch } from 'react-redux';
-import AppsIcon from '@mui/icons-material/Apps';
 import { AutoCompletePane } from './AuctoCompletePane';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { useSearchBarStyle } from '../../assets/styles/index.styles';
 
 export const SearchBar = ()=>{
     //field entry
@@ -17,7 +18,7 @@ export const SearchBar = ()=>{
     const inputRef = useRef<HTMLInputElement>(null);
     const dispatch = useDispatch();
     const { request } = bindActionCreators(actionCreators, dispatch);
-    
+    const classes = useSearchBarStyle();
     //once user select an area we want it to update text field
     useLayoutEffect(() => {
         //assert inputRef only update when selectedArea not empty
@@ -40,7 +41,12 @@ export const SearchBar = ()=>{
     }
     //onBlur inputEl
     const handleBlurInputField = () => setTimeout(() => setPopperAnchorEl(null), 300);
-    
+    //empty input field
+    const handleEmptyInput = () => {
+        if(inputRef.current)
+            inputRef.current.value = ''
+    }
+ 
     return(
         <>
             <TextField
@@ -68,6 +74,12 @@ export const SearchBar = ()=>{
                         </InputAdornment>
                     )
                 }}
+            />
+            <CancelIcon 
+                role = 'button' 
+                aria-label = 'close-icon-button'  
+                className = {classes.closeBtn}
+                onClick = { handleEmptyInput }
             />
             <AutoCompletePane 
                 anchor = {popperAnchorEl} 

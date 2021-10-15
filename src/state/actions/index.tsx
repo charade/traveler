@@ -12,5 +12,11 @@ export enum Actions{
     //add a momories to th map
     ADD_MEMORY = 'addMemory',
     //Load memories
-    LOAD_MEMORIES = 'loadMemories'
+    LOAD_MEMORIES = 'loadMemories',
+    //add a category to a memory
+    ADD_CATEGORY = "addCategory",
+    //remove all memories of a categories
+    REMOVE_CATEGORY = "removeCategory",
+    //delete memories of a category
+    DELETE_MEMORIES = "deleteMemories"
 }

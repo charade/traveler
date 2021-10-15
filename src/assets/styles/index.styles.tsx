@@ -1,11 +1,15 @@
 import useAppStyle from './App.styles';
-import useMapStyle from './Map.styles';
+import useMainStyle from './Main.styles';
 import useAutoCompletePaneStyle from './AuctoCompletepane.styles';
 import useFormStyle from './Form.styles';
+import useSearchBarStyle from './SearchBar.styles';
+import useCategoriesStyle from './Categories.styles';
 
 export { 
     useAppStyle, 
-    useMapStyle, 
+    useMainStyle, 
     useAutoCompletePaneStyle,
-    useFormStyle
+    useFormStyle,
+    useSearchBarStyle,
+    useCategoriesStyle
 };

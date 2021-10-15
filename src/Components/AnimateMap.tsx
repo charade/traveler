@@ -3,8 +3,8 @@ import { useLayoutEffect, useEffect } from "react";
 import { Marker, useMap } from "react-leaflet";
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import * as mapActionCreators from '../../state/actions-creators/map-actions-creators';
-import { ReducerRootStateType } from '../../state/store';
+import * as mapActionCreators from '../state/actions-creators/map-actions-creators';
+import { ReducerRootStateType } from '../state/store';
 
 export const AnimateMap = () => {
     //toogle dialog
@@ -47,10 +47,9 @@ export const AnimateMap = () => {
     useLayoutEffect(() => {
         //position contains coords and label properties
         //coords are type LatLng oject with lat(latitude key) & lng(lngitude key)
-        //
         if(position.coords){
             console.log(position.coords)
-            map.flyTo([position.coords!.lat, position.coords!.lng],14, {
+            map.flyTo([position.coords!.lat, position.coords!.lng],16, {
                 duration : 2,
             })
         }

@@ -1,5 +1,5 @@
 import { useAppStyle } from "./assets/styles/index.styles"
-import { Map } from "./components/map/Map";
+import { Main } from "./components/Main";
 import { Form } from "./components/newMemory/Form";
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
   return (
     <div className = {classes.root}>
         <Form />
-        <Map />
+        <Main />
     </div>
   );
 }

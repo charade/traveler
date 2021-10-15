@@ -5,9 +5,11 @@ import { TextField, Button} from "@material-ui/core";
 import { ReducerRootStateType } from "../../state/store";
 import Picker, {IEmojiData} from "emoji-picker-react";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
+import Autocomplete from '@mui/material/Autocomplete';
 import { useSelector, useDispatch } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as memoriesActionsCreator from '../../state/actions-creators/memories-actions-creators';
+import { convertToObject } from "typescript";
 
 export const Form = () => {
     const classes = useFormStyle();
@@ -17,25 +19,34 @@ export const Form = () => {
     const [showEmojisPicker, setShowEmojisPicker] = useState<boolean>(false);
     //save emojis as markers
     const [marker, setMarker] = useState<string>('');
+    //add category to memory
+    //type need to be compatible with Autocomplete component onChange func value argument
+    const [category, setCategory] = useState<string | null>('')
     //get selected are coords & label
     const position = useSelector((store : ReducerRootStateType) => store.mapStore);
     //get memories store
     const memories = useSelector((store : ReducerRootStateType) => store.memoriesStore)
+    const categories = useSelector((store : ReducerRootStateType) => store.catoriesStore);
     //dispatch new created memory
     const dispatch = useDispatch();
     const { addMemory } = bindActionCreators(memoriesActionsCreator, dispatch);
 
     const handleCommentChanges = (e : React.ChangeEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement;
-        console.log(e)
         setComment(target.value);
     };
-    
+
+    const handleCategoryChange = (e : React.SyntheticEvent, value : string | null) =>{
+        setCategory(value);
+    };
+
     const handleSubmit =  (e : React.SyntheticEvent) => {
         e.preventDefault();
         //check if necessary datas are given before dispatch
-        if(position.coords && marker){
-            const datas = {...position, marker, comment};
+        console.log(category)
+        if(position.coords && marker && category){
+            const datas = {...position, marker, comment, category};
+            console.log(datas)
             addMemory(datas);
             //when submit close emojis picker
             setShowEmojisPicker(false)
@@ -48,13 +59,28 @@ export const Form = () => {
             onSubmit =  { handleSubmit }
         >
             <SearchBar />
+            <Autocomplete 
+                disablePortal
+                onChange = { handleCategoryChange }
+                options = {categories}
+                noOptionsText = "you need to add categories"
+                renderInput = {
+                    (params) => <TextField 
+                        {...params} 
+                        required 
+                        variant = "outlined" 
+                        label = "choose a category"
+                        InputLabelProps = {{className : classes.textFieldLabel}}
+                    />
+                } 
+            />
             <TextField 
                 fullWidth
-                InputLabelProps = {{style : {fontSize : '1.5rem', width : "130px", background :'white'}}}
+                InputLabelProps = {{className : classes.textFieldLabel}}
                 onChange = { handleCommentChanges }
                 multiline
-                maxRows = {5}
-                minRows = {5}
+                maxRows = {3}
+                minRows = {3}
                 label = 'add a comment'
                 variant = 'outlined'
                 inputProps = {{style : {fontSize : '1.7rem', paddingTop : '5px'}}}
