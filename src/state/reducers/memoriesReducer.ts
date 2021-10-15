@@ -13,19 +13,24 @@ export interface Memory{
     comment : string
 };
 
-type StateType = Array<Memory> | []
+type StateType = Array<Memory> 
 
-interface ActionsType {
+interface AddMemory {
     type : string,
-    payload : Memory
+    payload : Memory  
 };
+interface LoadMemories{
+    type :string;
+    payload : Memory[]
+}
+export type ActionsMemoriesT = AddMemory | LoadMemories ;
 
-export type ActionsMemoriesT = ActionsType;
-
-const memoriesReducer = (state : StateType = [], action : ActionsMemoriesT) => {
+const memoriesReducer = (state : StateType = [] as Memory[], action : ActionsMemoriesT) => {
     switch(action.type){
         case Actions.ADD_MEMORY :
             return [...state, action.payload];
+        case Actions.LOAD_MEMORIES :
+            return state.concat(action.payload as Memory[])
         default : return state;
     }
 }

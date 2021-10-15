@@ -10,3 +10,12 @@ export const addMemory = (args : Memory ) => {
         })
     }
 }
+
+export const loadMemories = (args : Memory[]) => {
+    return(dispatch : Dispatch<ActionsMemoriesT>) => {
+        dispatch({
+            type : Actions.LOAD_MEMORIES,
+            payload : args
+        })
+    }
+}

@@ -19,6 +19,8 @@ export const Form = () => {
     const [marker, setMarker] = useState<string>('');
     //get selected are coords & label
     const position = useSelector((store : ReducerRootStateType) => store.mapStore);
+    //get memories store
+    const memories = useSelector((store : ReducerRootStateType) => store.memoriesStore)
     //dispatch new created memory
     const dispatch = useDispatch();
     const { addMemory } = bindActionCreators(memoriesActionsCreator, dispatch);
@@ -34,7 +36,9 @@ export const Form = () => {
         //check if necessary datas are given before dispatch
         if(position.coords && marker){
             const datas = {...position, marker, comment};
-            addMemory(datas)
+            addMemory(datas);
+            //when submit close emojis picker
+            setShowEmojisPicker(false)
         }
     };
 

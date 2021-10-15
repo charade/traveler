@@ -11,7 +11,7 @@ const useMapStyle = makeStyles(theme => ({
     markerContainer : {
         border : 'none',
         background :'transparent',
-        fontSize : '2.5rem'
+        fontSize : '3.5rem'
     }
 
 }))

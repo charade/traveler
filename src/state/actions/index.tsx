@@ -10,5 +10,7 @@ export enum Actions{
     //bind a memory to a place
     CREATE_MEMORIES = 'createMemories',
     //add a momories to th map
-    ADD_MEMORY = 'addMemory'
+    ADD_MEMORY = 'addMemory',
+    //Load memories
+    LOAD_MEMORIES = 'loadMemories'
 }
