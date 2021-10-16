@@ -36,7 +36,7 @@ const memoriesReducer = (state : StateType = [] as Memory[], action : ActionsMem
             return [...state, action.payload];
         case Actions.LOAD_MEMORIES :
             return state.concat(action.payload as Memory[])
-        case Actions.DELETE_MEMORIES : 
+        case Actions.DELETE_MEMORIES :
             return state.filter(memory => memory.category !== action.payload)
         default : return state;
     }

@@ -1,9 +1,8 @@
 import { Dispatch } from "react";
 import { Actions } from '../actions/index';
 import { ActionResponseType } from "../reducers/requestReducer";
-import { getPlace, reverseCoordToPlace } from "../../services";
+import { getPlace } from "../../services";
 import { AxiosError, AxiosResponse } from "axios";
-import { LatLng } from "leaflet";
 
 export const request = (entry: string) =>{
     return(dispatch : Dispatch<ActionResponseType>) => {

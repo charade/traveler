@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { MapContainer, TileLayer, Marker, Popup} from 'react-leaflet';
 import L from 'leaflet';
 import { useMediaQuery } from '@material-ui/core';
@@ -6,6 +7,7 @@ import { AnimateMap } from './AnimateMap';
 import { useDispatch, useSelector } from 'react-redux';
 import { bindActionCreators } from "redux";
 import * as memoriesActionCreators from '../state/actions-creators/memories-actions-creators';
+import * as categoriesActionCreators from '../state/actions-creators/caterogies-action-creators';
 import { ReducerRootStateType } from '../state/store';
 import { Memory } from '../state/reducers/memoriesReducer';
 import { useEffect } from 'react';
@@ -19,21 +21,37 @@ const DEFAULT_POSITION_ON_PARIS = {
 export const Main = () => {
     const classes = useMainStyle();
     const memories = useSelector((store : ReducerRootStateType) => store.memoriesStore)
+    const [memosToDisplay, setMemosToDisplay] = useState<Memory[]>([])
     const dispatch = useDispatch();
     const { loadMemories } = bindActionCreators(memoriesActionCreators, dispatch);
+    const { loadCategories } = bindActionCreators(categoriesActionCreators, dispatch)
+    //listening whether a category is selected
+    const selectedCategory = useSelector((store : ReducerRootStateType) => store.selectedCategoryStore);
     const isScreenLarge = useMediaQuery('(min-width : 700px)');
-    //loading local stored momeries at componentDidMount if there are some
+    
+    //loading local stored momeries & caegories at componentDidMount if there are some
     useEffect(() => {
         const memos = localStorage.getItem("memories");
-        if(memos){
-            loadMemories(JSON.parse(memos))
-        }
+        const categories = localStorage.getItem("categories");
+        //loading categories
+        categories && loadCategories(JSON.parse(categories));
+        //loading memories
+        memos && loadMemories(JSON.parse(memos))
     },[]);
 
     //each time new memory created we save memories into the local storage
     useEffect(() => {
         localStorage.setItem("memories", JSON.stringify(memories))
     },[memories]);
+
+    useEffect(() => {
+        if(selectedCategory === 'all'){
+            setMemosToDisplay(memories)
+            return;
+        }
+        const memos = (memories as Memory[]).filter(memo => memo.category === selectedCategory);
+        memos.length && setMemosToDisplay(memos)
+    },[selectedCategory, memories ]);
 
     return(
         <div className = {classes.root}>
@@ -48,7 +66,7 @@ export const Main = () => {
                 />
                <AnimateMap />
                {
-                    (memories as Memory[]).map((memory : Memory) => {
+                    memosToDisplay.map((memory : Memory) => {
                        return(
                             <Marker
                                 position = {[memory.coords!.lat, memory.coords!.lng]}

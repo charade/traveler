@@ -18,5 +18,9 @@ export enum Actions{
     //remove all memories of a categories
     REMOVE_CATEGORY = "removeCategory",
     //delete memories of a category
-    DELETE_MEMORIES = "deleteMemories"
+    DELETE_MEMORIES = "deleteMemories",
+    //load categories 
+    LOAD_CATEGORIES = 'loadCategories',
+    //select category
+    SELECT_CATEGORY = 'selectCategory'
 }

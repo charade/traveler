@@ -1,5 +1,5 @@
 import React, { useState, useRef, useLayoutEffect } from 'react';
-import { IconButton, TextField } from '@material-ui/core';
+import { TextField } from '@material-ui/core';
 import ExploreIcon from '@mui/icons-material/Explore';
 import InputAdornment from '@mui/material/InputAdornment';
 import * as actionCreators from '../../state/actions-creators/request-action-creators';

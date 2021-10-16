@@ -19,3 +19,12 @@ export const removeCategory = (str : string) => {
         })
     }
 }
+
+export const loadCategories = (categories : string[]) => {
+    return (dispatch : Dispatch<CategoriesActionT>) => {
+        dispatch({
+            type : Actions.LOAD_CATEGORIES,
+            payload : categories
+        })
+    }
+}
