@@ -28,12 +28,17 @@ const useCategoriesStyle = makeStyles(theme => ({
         flexBasis : '80px'
     },
     caterories:{
-        border: '1px solie blue',
+        // border: '1px solid blue',
         display : 'flex',
         flexWrap : 'wrap',
-        // margin : '25px',
+        
         '& > *' : {
             margin :'7px'
+        },
+        [theme.breakpoints.up('sm')] : {
+            height : '100px',
+            overflow : 'scroll'
+
         }
     }
 }))

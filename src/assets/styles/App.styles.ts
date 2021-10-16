@@ -7,15 +7,22 @@ const useAppStyle = makeStyles(theme => ({
         overflow : 'hidden',
         alignItems : 'center',
         flexDirection : 'column',
-        paddingTop: '20px',
+        // paddingTop: '20px',
         '& > *' : {
             margin :'0 2%'
+        },
+        [theme.breakpoints.up('sm')] : {
+            paddingTop: '30px',
         },
         [theme.breakpoints.up('md')] : {
             alignItems : 'flex-start',
             paddingTop: '100px',
             flexDirection : 'row',
         }
+    },
+    toggler : {
+        border : '1px solid rgba(0, 0, 0, .4)',
+        margin: '10px 0 20px 0'
     }
 }))
 

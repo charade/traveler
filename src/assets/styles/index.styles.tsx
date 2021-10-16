@@ -4,6 +4,7 @@ import useAutoCompletePaneStyle from './AuctoCompletepane.styles';
 import useFormStyle from './Form.styles';
 import useSearchBarStyle from './SearchBar.styles';
 import useCategoriesStyle from './Categories.styles';
+import useDrawerStyle from './MenuDrawer.styles';
 
 export { 
     useAppStyle, 
@@ -11,5 +12,6 @@ export {
     useAutoCompletePaneStyle,
     useFormStyle,
     useSearchBarStyle,
-    useCategoriesStyle
+    useCategoriesStyle,
+    useDrawerStyle
 };
