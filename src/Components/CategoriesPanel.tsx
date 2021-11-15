@@ -46,7 +46,7 @@ export const CategoriesPanel = () => {
     //delete a category and all related memories
     const handleDeleteCategory = (e : React.PointerEvent<SVGElement>) => {
         // e.stopPropagation();
-        console.log('clicked')
+        
         const btnTarget = e.target as SVGElement;
         //span elemnt innerText correponds to category label
         const target = btnTarget.previousElementSibling as HTMLSpanElement
