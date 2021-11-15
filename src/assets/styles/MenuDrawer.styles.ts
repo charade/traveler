@@ -4,6 +4,5 @@ const useDrawerStyle = makeStyles(theme => ({
     root : {
         width : '210px'
     }
-}))
-
+}));
 export default useDrawerStyle;

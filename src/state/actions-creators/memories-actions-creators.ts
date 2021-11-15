@@ -21,7 +21,6 @@ export const loadMemories = (args : Memory[]) => {
 }
 
 export const deleteMemories = (args : string) => {
-    console.log(args)
     return (dispatch : Dispatch<ActionsMemoriesT>) => {
         dispatch({
             type : Actions.DELETE_MEMORIES,

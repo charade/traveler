@@ -16,7 +16,6 @@ export const AnimateMap = () => {
     useEffect(() => {
         if('geolocation' in navigator){
             navigator.geolocation.getCurrentPosition((position) => {
-                console.log(position)
                 mapFlyTo({
                     coords : new LatLng(position.coords.latitude, position.coords.longitude),
                     label :  ''
@@ -40,12 +39,12 @@ export const AnimateMap = () => {
         const handleClick = () => map.setZoom(map.getZoom() + 1, {easeLinearity : 1})
         map.on('click',handleClick);
     },[]);
+
     //update map with a fly effect when new location selected
     useLayoutEffect(() => {
         //position contains coords and label properties
         //coords are type LatLng oject with lat(latitude key) & lng(lngitude key)
         if(position.coords){
-            console.log(position.coords)
             map.flyTo([position.coords!.lat, position.coords!.lng],16, {
                 duration : 2,
             })

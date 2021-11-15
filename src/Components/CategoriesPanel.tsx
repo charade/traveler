@@ -22,7 +22,6 @@ export const CategoriesPanel = () => {
     useEffect(() => {
         localStorage.setItem('categories', JSON.stringify(categories));
     },[categories]);
-
     //input field changes
     const handleNewCategoryChange = (e : React.ChangeEvent<HTMLInputElement>) => {
         const target = e.target as HTMLInputElement ;
@@ -39,15 +38,15 @@ export const CategoriesPanel = () => {
             inputRef.current.value = ''
         }
     } 
-
     //select category on click chip
     const handleSelectCategory  = (e : React.MouseEvent<HTMLSpanElement>) => {
         const target = e.target as HTMLSpanElement;
         selectCategory(target.innerText);
     }
     //delete a category and all related memories
-    const handleChipDelete = (e : React.MouseEvent<SVGElement>) => {
-        e.stopPropagation();
+    const handleDeleteCategory = (e : React.PointerEvent<SVGElement>) => {
+        // e.stopPropagation();
+        console.log('clicked')
         const btnTarget = e.target as SVGElement;
         //span elemnt innerText correponds to category label
         const target = btnTarget.previousElementSibling as HTMLSpanElement
@@ -90,7 +89,7 @@ export const CategoriesPanel = () => {
                 {(categories as string[]).map(category => {
                     return(
                         <Chip label = {category}
-                            onDelete = { handleChipDelete }
+                            onDelete = { handleDeleteCategory }
                             onClick = { handleSelectCategory }
                             size = 'medium'
                         />
