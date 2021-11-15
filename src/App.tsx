@@ -1,10 +1,10 @@
 import { useState } from "react";
 import { useAppStyle } from "./assets/styles/index.styles"
-import { Main } from "./components/Main";
-import { Form } from "./components/newMemory/Form";
+import { Main } from "./Components/Main";
+import { Form } from "./Components/newMemory/Form";
 import AppsIcon from '@mui/icons-material/Apps';
 import { IconButton, useMediaQuery } from "@material-ui/core";
-import { MenuDrawer } from './components/MenuDrawer';
+import { MenuDrawer } from './Components/MenuDrawer';
 
 function App() {
   const [openDrawer, setOpenDrawer] = useState<boolean>(false);
