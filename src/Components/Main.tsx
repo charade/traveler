@@ -66,9 +66,10 @@ export const Main = () => {
                 />
                <AnimateMap />
                {
-                    memosToDisplay.map((memory : Memory) => {
+                    memosToDisplay.map((memory : Memory,i) => {
                        return(
                             <Marker
+                                key = {`${memory}-${i}-at-${memory.label}`}
                                 position = {[memory.coords!.lat, memory.coords!.lng]}
                                 icon = {new L.DivIcon({
                                     className : classes.markerContainer, 

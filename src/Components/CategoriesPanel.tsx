@@ -51,8 +51,8 @@ export const CategoriesPanel = () => {
         //span elemnt innerText correponds to category label
         const target = btnTarget.previousElementSibling as HTMLSpanElement
         if(target){
-            removeCategory(target.innerText);
             deleteMemories(target.innerText);
+            removeCategory(target.innerText);
         }
     };
 
@@ -86,9 +86,10 @@ export const CategoriesPanel = () => {
                     /> : ''
                 }
 
-                {(categories as string[]).map(category => {
+                {(categories as string[]).map((category,i )=> {
                     return(
                         <Chip label = {category}
+                            key = {`${category}-i-item`}
                             onDelete = { handleDeleteCategory }
                             onClick = { handleSelectCategory }
                             size = 'medium'
